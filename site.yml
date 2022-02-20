@@ -125,16 +125,16 @@
       tags:
         - mount_filesystems
     - name: Run pacstrap
-      command: pacstrap /mnt base dhclient dhcpcd efibootmgr grub linux linux-firmware lvm2 netctl openssh python reflector sudo
+      command: pacstrap /mnt base dhclient dhcpcd efibootmgr grub linux linux-firmware lvm2 netctl openssh python reflector vim sudo 
       tags:
         - pacstrap
-    - name: Restrict reflector to only US mirrors
-      ansible.builtin.lineinfile:
-        insertafter: \# --country
-        line: --country "United States"
-        path: /mnt/etc/xdg/reflector/reflector.conf
-      tags:
-        - mirrors
+#    - name: Restrict reflector to only ES mirrors
+#      ansible.builtin.lineinfile:
+#        insertafter: \# --country
+#        line: --country "United States"
+#        path: /mnt/etc/xdg/reflector/reflector.conf
+#      tags:
+#        - mirrors
     - name: Generate fstab
       block:
         - name: Generate blank fstab
@@ -178,7 +178,7 @@
       tags:
         - crypttab
     - name: Set local timezone
-      command: arch-chroot /mnt ln -sf /usr/share/zoneinfo/America/New_York /etc/localtime
+      command: arch-chroot /mnt ln -sf /usr/share/zoneinfo/Europe/Madrid /etc/localtime
       tags:
         - timezone
     - name: Generate adjtime file
